@@ -1,0 +1,2 @@
+include I2C-AO-Actor/config.yaml
+recursive-include I2C-AO-Actor/static *

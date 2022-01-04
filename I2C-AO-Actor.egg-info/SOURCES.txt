@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+setup.py
+I2C-AO-Actor/__init__.py
+I2C-AO-Actor/config.yaml
+I2C-AO-Actor.egg-info/PKG-INFO
+I2C-AO-Actor.egg-info/SOURCES.txt
+I2C-AO-Actor.egg-info/dependency_links.txt
+I2C-AO-Actor.egg-info/top_level.txt
+I2C-AO-Actor/static/cbpi.png
+I2C-AO-Actor/static/index.html
+I2C-AO-Actor/static/style.css
