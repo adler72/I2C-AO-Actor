@@ -48,8 +48,8 @@ class CustomActor(CBPiActor):
         logger.info("ACTOR %s ON" % self.id)
         if power is not None:
             self.power = int(power)
-        HBy = int(int(self.power)*10.23/256)
-        LBy = int(int(self.power)*10.23-HBy*256)
+        HBy = int(50.0*10.23/256.0)
+        LBy = int(50.0*10.23-HBy*256.0)
         field=[LBy,HBy]
         try:
             self.bus.write_i2c_block_data(0x58,0x00,field)
