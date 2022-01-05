@@ -65,6 +65,17 @@ class CustomActor(CBPiActor):
             pass
         self.state = False
 
+    async def set_power(self, power):
+        if power is not None:
+            self.power = int(power)
+        HBy = int(int(self.power)*10.23/256)
+        LBy = int(int(self.power)*10.23-HBy*256)
+        field=[LBy,HBy]
+        try:
+            self.bus.write_i2c_block_data(int(self.address_AO),int(self.port_AO,16),field) 
+        except: # exception if write_byte fails
+            pass  
+
     def get_state(self):
         return self.state
     
