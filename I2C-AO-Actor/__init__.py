@@ -44,7 +44,7 @@ class CustomActor(CBPiActor):
         self.bus = SMBus(1) # 1 indicates /dev/i2c-1
         pass
 
-    async def on(self, power=None):
+    async def on(self, power=0):
         logger.info("ACTOR %s ON" % self.id)
         if power is not None:
             self.power = int(power)
@@ -60,11 +60,8 @@ class CustomActor(CBPiActor):
 
     async def off(self):
         logger.info("ACTOR %s OFF " % self.id)
-        HBy = 0
-        LBy = 0
-        field=[LBy,HBy]
         try:
-            self.bus.write_i2c_block_data(0x58,0x00,field) 
+            self.bus.write_i2c_block_data(0x58,0x00,[0,0]) 
         except: # exception if write_byte fails
             pass
         self.state = False
