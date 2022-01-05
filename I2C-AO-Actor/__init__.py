@@ -26,15 +26,16 @@ def get_Address():
 
 @parameters([Property.Select("Address AO", get_Address(), description="The I2C actor address."),Property.Select("Port AO", options=[0x00,0x01,0x02,0x03], description="Port of the Analog-Ouput-Modul to which the actor is connected")])
 class CustomActor(CBPiActor):
-     @action("Set Power", parameters=[Property.Number(label="Power", configurable=True,description="Power Setting [0-100]")])
+    
+    @action("Set Power", parameters=[Property.Number(label="Power", configurable=True,description="Power Setting [0-100]")])
     async def setpower(self,Power = 100 ,**kwargs):
         self.power=int(Power)
         if self.power < 0:
             self.power = 0
         if self.power > 100:
             self.power = 100           
-        await self.set_power(self.power)      
-     
+        await self.set_power(self.power)
+        
     def init(self, props):
         self.state = False
         self.adress_AO = int(self.props.get("Adress AO",104))
@@ -73,7 +74,6 @@ class CustomActor(CBPiActor):
         await self.cbpi.actor.actor_update(self.id,power)
         pass
    
-
     def get_state(self):
         return self.state
     
