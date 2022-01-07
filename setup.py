@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='I2C-AO-Actor',
-      version='0.0.11',
+      version='0.0.12',
       description='CraftBeerPi Plugin',
       author='Marc Adler',
       author_email='aeda@gmx.de',
