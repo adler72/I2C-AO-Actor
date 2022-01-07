@@ -85,6 +85,14 @@ class CustomActor(CBPiActor):
       return self.state
     
    async def run(self):
+      bus = SMBus(1) # 1 indicates /dev/i2c-1  
+      HBy = int(int(self.power)*10.23/256)
+      LBy = int(int(self.power)*10.23-HBy*256)
+      field=[LBy,HBy]
+      try:
+          bus.write_i2c_block_data(0x58,0x00,field)
+      except: # exception if write_byte fails
+          pass  
       pass
 
 def setup(cbpi):
