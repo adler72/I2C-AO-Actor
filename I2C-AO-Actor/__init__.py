@@ -87,6 +87,7 @@ class CustomActor(CBPiActor):
     def get_state(self):
         return self.state
    
-   def setup(cbpi):
-    cbpi.plugin.register("I2C-AO-Actor", CustomActor)
-    pass
+        
+    def setup(cbpi):
+        cbpi.plugin.register("I2C-AO-Actor", CustomActor)
+        pass
