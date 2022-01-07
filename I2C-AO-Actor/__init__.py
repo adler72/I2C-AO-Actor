@@ -50,11 +50,11 @@ class CustomActor(CBPiActor):
         bus = SMBus(1) # 1 indicates /dev/i2c-1
         if power is not None:
             self.power = int(power)
-        HBy = int(50.0*10.23/256.0)
-        LBy = int(50.0*10.23-HBy*256.0)
+        HBy = int(self.power*10.23/256.0)
+        LBy = int(self.power*10.23-HBy*256.0)
         field=[LBy,HBy]
         try:
-            bus.write_i2c_block_data(hex(int(address_AO)),hex(int(port_AO)),field)
+            bus.write_i2c_block_data(0x58,0x00,field)
         except: # exception if write_byte fails
             pass  
         self.state = True
@@ -66,7 +66,7 @@ class CustomActor(CBPiActor):
         port_AO = int(self.props.get("Port AO",0)) 
         bus = SMBus(1) # 1 indicates /dev/i2c-1
         try:
-            bus.write_i2c_block_data(hex(int(address_AO)),hex(int(port_AO)),[0,0])    
+            bus.write_i2c_block_data(0x58,0x00,[0,0])    
         except: # exception if write_byte fails
             pass
         self.state = False
