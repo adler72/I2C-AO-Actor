@@ -88,20 +88,19 @@ class CustomActor(CBPiActor):
         return self.state
     
     async def run(self,power):
-        self.power = power
-        HBy = int(int(self.power)*10.23/256)
-        LBy = int(int(self.power)*10.23-HBy*256)
-        field=[LBy,HBy]
-        bus = SMBus(1) # 1 indicates /dev/i2c-1
+       
         while self.running == True:
-            if self.state == True:
-             try:
-                bus.write_i2c_block_data(0x58,0x00,field) 
-             except: # exception if write_byte fails
-                pass     
-            else:
-                await asyncio.sleep(1)
-           pass
+           self.power = power
+           HBy = int(int(self.power)*10.23/256)
+           LBy = int(int(self.power)*10.23-HBy*256)
+           field=[LBy,HBy]
+           bus = SMBus(1) # 1 indicates /dev/i2c-1
+           try:
+              bus.write_i2c_block_data(0x58,0x00,field) 
+           except: # exception if write_byte fails
+            pass  
+        await self.cbpi.actor.actor_update(self.id,power)
+        pass
 
    def setup(cbpi):
     cbpi.plugin.register("I2C-AO-Actor", CustomActor)
