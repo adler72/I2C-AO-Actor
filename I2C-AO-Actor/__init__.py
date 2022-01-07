@@ -28,7 +28,16 @@ def get_Address():
 class CustomActor(CBPiActor):
     
     @action("Set Power", parameters=[Property.Number(label="Power", configurable=True,description="Power Setting [0-100]")])
-        
+     
+    def __init__(self,cbpi):
+        self.cbpi = cbpi
+        self._task = asyncio.create_task(self.init_actor())
+
+    async def init_actor(self):
+        self.address_AO = int(self.props.get("Address AO",88))
+        self.port_AO = int(self.props.get("Port AO",0))        
+        self.bus = SMBus(1) # 1 indicates /dev/i2c-1
+        pass
         
     async def setpower(self,Power = 100 ,**kwargs):
         self.power=int(Power)
@@ -37,13 +46,7 @@ class CustomActor(CBPiActor):
         if self.power > 100:
             self.power = 100           
         await self.set_power(self.power)
-        
-    async def on_start(self, props):
-        self.state = False
-        self.address_AO = int(self.props.get("Address AO",88))
-        self.port_AO = int(self.props.get("Port AO",0))        
-        self.bus = SMBus(1) # 1 indicates /dev/i2c-1
-        pass
+    
 
     async def on(self, power=0):
         logger.info("ACTOR %s ON" % self.id)
