@@ -88,7 +88,12 @@ class CustomActor(CBPiActor):
        
     def get_state(self):
         return self.state
-   
+  
+    async def run(self):
+        while self.running == True:
+            if self.state == True:
+            else:
+                await asyncio.sleep(1)
         
     def setup(cbpi):
         cbpi.plugin.register("I2C-AO-Actor", CustomActor)
