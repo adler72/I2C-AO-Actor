@@ -55,7 +55,6 @@ class CustomActor(CBPiActor):
           pass  
       self.state = True
 
-
    async def off(self):
       logger.info("ACTOR %s OFF " % self.id)
       HBy = 0
@@ -72,13 +71,11 @@ class CustomActor(CBPiActor):
       await self.cbpi.actor.actor_update(self.id,power)
       pass
    
-
    def get_state(self):
       return self.state
     
    async def run(self):
       pass
-
 
    def setup(cbpi):
       cbpi.plugin.register("I2C-AO-Actor", CustomActor)
