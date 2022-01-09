@@ -51,7 +51,7 @@ class CustomActor(CBPiActor):
       LBy = int(int(self.power)*10.23-HBy*256)
       field=[LBy,HBy]
       try:
-          bus.write_i2c_block_data(self.adress_AO,0x00,field)
+          bus.write_i2c_block_data(self.adress_AO,self.port_AO,field)
       except: # exception if write_byte fails
           pass  
       self.state = True
@@ -63,7 +63,7 @@ class CustomActor(CBPiActor):
       LBy = 0
       field=[LBy,HBy]
       try:
-          bus.write_i2c_block_data(self.adress_AO,0x00,field) 
+          bus.write_i2c_block_data(self.adress_AO,self.port_AO,field) 
       except: # exception if write_byte fails
           pass
       self.state = False
@@ -75,7 +75,7 @@ class CustomActor(CBPiActor):
       LBy = int(int(self.power)*10.23-HBy*256)
       field=[LBy,HBy]
       try:
-          bus.write_i2c_block_data(self.adress_AO,0x00,field)
+          bus.write_i2c_block_data(self.adress_AO,self.port_AO,field)
       except: # exception if write_byte fails
           pass  
       await self.cbpi.actor.actor_update(self.id,power)
@@ -90,7 +90,7 @@ class CustomActor(CBPiActor):
       LBy = int(int(self.power)*10.23-HBy*256)
       field=[LBy,HBy]
       try:
-          bus.write_i2c_block_data(self.adress_AO,0x00,field)
+          bus.write_i2c_block_data(self.adress_AO,self.port_AO,field)
       except: # exception if write_byte fails
           pass  
       pass
